@@ -1,0 +1,13 @@
+stages:
+  - codescan
+
+codescan:
+  stage: codescan
+  image: sonarsource/sonar-scanner-cli:4.8.0
+  script:
+    - echo $SONAR_HOST_URL
+    - sonar-scanner -Dsonar.projectKey=DATRIX-KVM-USTREAMER -Dsonar.host.url=http://ip:port -Dsonar.login=197e7c2bfcd32bf54b05be86c1f7f93f719ab049 -Dsonar.sources=.
+  allow_failure: true
+  when: always
+  tags:
+    - DATRIX-KVM-USTREAMER
