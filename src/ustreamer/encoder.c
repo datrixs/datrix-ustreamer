@@ -112,7 +112,9 @@ us_workers_pool_s *us_encoder_workers_pool_init(us_encoder_s *enc, us_device_s *
 
 	if (type == US_ENCODER_TYPE_MPP) {
 		US_LOG_INFO("Switching to MPP encoder ...");
-		_ER(mpp) = us_mpp_jpeg_encoder_init(dev->width, dev->height, MPP_FMT_YUV422_UYVY, 30, quality);
+		if (_ER(mpp) == NULL) {
+			_ER(mpp) = us_mpp_jpeg_encoder_init(dev->width, dev->height, MPP_FMT_YUV422_UYVY, 30, quality);
+		}
 		n_workers = 1;
 
 	} else if (type == US_ENCODER_TYPE_HW) {
